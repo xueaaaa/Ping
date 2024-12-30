@@ -49,7 +49,7 @@ namespace Ping.Services
                 _navigationWindow!.ShowWindow();
 
                 // Default page
-                _navigationWindow.Navigate(typeof(Views.Pages.SettingsPage));
+                _navigationWindow.Navigate(typeof(Views.Pages.MainPage));
             }
 
             await Task.CompletedTask;

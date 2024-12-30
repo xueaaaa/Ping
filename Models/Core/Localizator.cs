@@ -12,7 +12,7 @@ namespace Ping.Models.Core
         /// </summary>
         public static event EventHandler LanguageChanged;
 
-        private static List<CultureInfo> _appLanguages = new List<CultureInfo>();
+        private static List<CultureInfo> _appLanguages = new();
         /// <summary>
         /// List of all available application languages in CultureInfo format 
         /// </summary>
@@ -33,16 +33,16 @@ namespace Ping.Models.Core
                 if (value == Thread.CurrentThread.CurrentUICulture) return;
 
                 Thread.CurrentThread.CurrentUICulture = value;
-                ResourceDictionary dictionary = new ResourceDictionary();
+                ResourceDictionary dictionary = [];
 
                 if (value.TwoLetterISOLanguageName == Properties.Settings.Default.DefaultLanguage.TwoLetterISOLanguageName)
-                    dictionary.Source = new Uri("Resources/Locales/Locale.xaml", UriKind.Relative);
+                    dictionary.Source = new Uri("Resources/Locales/loc.xaml", UriKind.Relative);
                 else
-                    dictionary.Source = new Uri($"Resources/Locales/{value.Name}.Locale.xaml", UriKind.Relative);
+                    dictionary.Source = new Uri($"Resources/Locales/{value.Name}.loc.xaml", UriKind.Relative);
 
                 // Search for the dictionary of the previous locale
                 ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.Where(d =>
-                d.Source != null && d.Source.OriginalString.EndsWith("Locale.xaml")).First();
+                d.Source != null && d.Source.OriginalString.EndsWith("loc.xaml")).First();
 
                 if (oldDictionary != null)
                 {

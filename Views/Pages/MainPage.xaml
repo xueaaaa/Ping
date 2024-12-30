@@ -1,0 +1,71 @@
+﻿<Page x:Class="Ping.Views.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ping.Views.Pages"
+      mc:Ignorable="d" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      d:DataContext="{d:DesignInstance local:MainPage,
+                               IsDesignTimeCreatable=False}"
+      ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+      ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      d:Height="400" d:Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <ui:Button VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Icon="{ui:SymbolIcon CalendarToday24}"
+                       Content="{DynamicResource M_TodayButton}"/>
+            <ui:Button Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Icon="{ui:SymbolIcon CalendarMonth24}"
+                       Content="{DynamicResource M_PlansButton}"/>
+            <ui:Button Grid.Row="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Icon="{ui:SymbolIcon SelectAllOff24}"
+                       Content="{DynamicResource M_AllButton}"/>
+            <ui:Button Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Icon="{ui:SymbolIcon Checkmark24}"
+                       Content="{DynamicResource M_CompletedButton}"/>
+        </Grid>
+        
+        <ui:ListView Grid.Column="1"
+                     Grid.RowSpan="2">
+            
+        </ui:ListView>
+
+        <WrapPanel Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Orientation="Horizontal">
+            
+        </WrapPanel>
+    </Grid>
+</Page>

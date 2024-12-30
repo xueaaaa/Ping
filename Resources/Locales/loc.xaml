@@ -2,7 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="SettingsPageTitle">Settings</v:String>
-    
+    <v:String x:Key="MainPageTitle">Main</v:String>
+
+    <v:String x:Key="M_TodayButton">Today</v:String>
+    <v:String x:Key="M_PlansButton">Plans</v:String>
+    <v:String x:Key="M_AllButton">All</v:String>
+    <v:String x:Key="M_CompletedButton">Completed</v:String>
+
     <v:String x:Key="S_PersonalizationHeader">Personalization</v:String>
     <v:String x:Key="S_LightThemeName">Light</v:String>
     <v:String x:Key="S_DarkThemeName">Dark</v:String>

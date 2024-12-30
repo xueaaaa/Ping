@@ -1,11 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ping.Models.Core;
+using Ping.Properties;
 using Ping.Services;
 using Ping.ViewModels.Pages;
 using Ping.ViewModels.Windows;
 using Ping.Views.Pages;
 using Ping.Views.Windows;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -46,6 +49,8 @@ namespace Ping
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
 
+                services.AddSingleton<MainPage>();
+                services.AddSingleton<MainViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
             }).Build();
@@ -66,6 +71,19 @@ namespace Ping
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Localizator.AddLang(new CultureInfo("en"));
+
+            Localizator.LanguageChanged += (_, _) =>
+            {
+                Settings.Default.Language = Localizator.CurrentLanguage;
+                Settings.Default.Save();
+            };
+
+            var lang = Settings.Default.Language;
+            Localizator.CurrentLanguage = lang ?? Settings.Default.DefaultLanguage;
+
+            Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
+
             _host.Start();
         }
 

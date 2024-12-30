@@ -19,6 +19,7 @@
                  WindowBackdropType="Mica"
                  WindowCornerPreference="Round"
                  WindowStartupLocation="CenterScreen"
+                 MinWidth="730" MinHeight="500"
                  mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +39,9 @@
             </ui:NavigationView.Header>
 
             <ui:NavigationView.MenuItems>
-                
+                <ui:NavigationViewItem Content="{DynamicResource MainPageTitle}"
+                                       Icon="{ui:SymbolIcon Home24}"
+                                       TargetPageType="{x:Type pages:MainPage}"/>
             </ui:NavigationView.MenuItems>
 
             <ui:NavigationView.FooterMenuItems>
