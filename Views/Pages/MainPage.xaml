@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Ping.Views.Pages"
+      xmlns:models="clr-namespace:Ping.Models.Task"
       mc:Ignorable="d" 
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       d:DataContext="{d:DesignInstance local:MainPage,
@@ -55,17 +56,43 @@
                        Icon="{ui:SymbolIcon Checkmark24}"
                        Content="{DynamicResource M_CompletedButton}"/>
         </Grid>
-        
-        <ui:ListView Grid.Column="1"
-                     Grid.RowSpan="2">
-            
-        </ui:ListView>
+
+        <Grid Grid.Column="1"
+              Grid.RowSpan="2"
+              Margin="20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ui:TextBlock d:Text="Selected Filter"
+                          HorizontalAlignment="Center"
+                          FontTypography="Subtitle"
+                          FontWeight="Bold"/>
+
+            <ListBox Grid.Row="1">
+                
+            </ListBox>
+        </Grid>
+
 
         <WrapPanel Grid.Row="1"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Orientation="Horizontal">
-            
+            <ListBox ItemsSource="{Binding ViewModel.Tags}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="models:Tag">
+                        <Button Background="{Binding BackgroundColor}"
+                                BorderBrush="Transparent">
+                            <TextBlock Foreground="{Binding Color}">
+                                <Run>#</Run>
+                                <Run Text="{Binding Name}"/>
+                            </TextBlock>
+                        </Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </WrapPanel>
     </Grid>
 </Page>
