@@ -24,38 +24,33 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Center"
-              VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
+        <WrapPanel HorizontalAlignment="Center"
+                   VerticalAlignment="Top">
             <ui:Button VerticalAlignment="Center"
                        HorizontalAlignment="Center"
+                       CornerRadius="0"
                        Icon="{ui:SymbolIcon CalendarToday24}"
                        Content="{DynamicResource M_TodayButton}"/>
             <ui:Button Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
+                       CornerRadius="0"
                        Icon="{ui:SymbolIcon CalendarMonth24}"
                        Content="{DynamicResource M_PlansButton}"/>
             <ui:Button Grid.Row="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
+                       CornerRadius="0"
                        Icon="{ui:SymbolIcon SelectAllOff24}"
                        Content="{DynamicResource M_AllButton}"/>
             <ui:Button Grid.Row="1"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
+                       CornerRadius="0"
                        Icon="{ui:SymbolIcon Checkmark24}"
                        Content="{DynamicResource M_CompletedButton}"/>
-        </Grid>
+        </WrapPanel>
 
         <Grid Grid.Column="1"
               Grid.RowSpan="2"
@@ -70,9 +65,42 @@
                           FontTypography="Subtitle"
                           FontWeight="Bold"/>
 
-            <ListBox Grid.Row="1">
-                
-            </ListBox>
+            <ItemsControl Grid.Row="1"
+                          ItemsSource="{Binding ViewModel.Tasks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:Card Padding="10"
+                                 MaxWidth="500">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel>
+                                    <ui:TextBlock FontTypography="Subtitle"
+                                                  Text="{Binding Name, Mode=TwoWay}"/>
+                                    <ui:TextBlock FontTypography="Body"
+                                                  Text="{Binding Description, Mode=TwoWay}"/>
+                                    <ui:TextBlock FontTypography="Caption"
+                                                  Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                                  Text="{Binding LeadTime, StringFormat=dd.MM.yyyy   HH:mm}"/>
+                                </StackPanel>
+                            </Grid>
+                        </ui:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel CanVerticallyScroll="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </Grid>
 
 
