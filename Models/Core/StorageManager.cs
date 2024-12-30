@@ -8,6 +8,9 @@ namespace Ping.Models.Core
     {
         private static readonly string PROGRAM_PATH = Directory.GetCurrentDirectory();
 
+        public const string TASKS_PATH = "tasks";
+        public const string TAGS_PATH = "tags";
+
         public static async void SaveAsJson(string directory, string name, object data)
         {
             if(!Directory.Exists($"{PROGRAM_PATH}/{directory}"))

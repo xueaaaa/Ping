@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Ping.Models.Core;
-using Ping.Models.Task;
 using Ping.Services;
 using Ping.ViewModels.Pages;
 using Ping.ViewModels.Windows;
@@ -12,7 +10,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
-using Task = Ping.Models.Task.Task;
 
 namespace Ping
 {
