@@ -1,0 +1,32 @@
+﻿using System.Globalization;
+using System.Windows;
+using Ping.Models;
+using Ping.Properties;
+
+namespace Ping
+{
+    public partial class App : Application
+    {
+        public App()
+        {
+            LocalizationManager.AddLang(CultureInfo.GetCultureInfo("ru"));
+            LocalizationManager.AddLang(CultureInfo.GetCultureInfo("en"));
+        }
+
+        public static void Restart()
+        {
+            System.Diagnostics.Process.Start(ResourceAssembly.Location);
+            Current.Shutdown();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var lang = Settings.Default.Language;
+            LocalizationManager.CurrentLanguage = lang == null ?
+                Settings.Default.DefaultLanguage :
+                lang;
+        }
+    }
+}
