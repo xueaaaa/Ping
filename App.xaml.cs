@@ -11,6 +11,13 @@ namespace Ping
         {
             LocalizationManager.AddLang(CultureInfo.GetCultureInfo("ru"));
             LocalizationManager.AddLang(CultureInfo.GetCultureInfo("en"));
+
+            LocalizationManager.LanguageChanged += LanguageChanged;
+        }
+
+        private void LanguageChanged(object? sender, EventArgs e)
+        {
+            
         }
 
         public static void Restart()

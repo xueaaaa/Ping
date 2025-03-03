@@ -54,7 +54,7 @@ namespace Ping.Models
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
                 }
 
-                LanguageChanged(Application.Current, new EventArgs());
+                LanguageChanged?.Invoke(Application.Current, new EventArgs());
             }
         }
 
