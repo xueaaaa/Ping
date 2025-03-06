@@ -7,11 +7,14 @@ namespace Ping.Models
     {
         private const string STORAGE_PATH = "storage";
 
+        private static string GetFilePath(string filename) =>
+            $"{Directory.GetCurrentDirectory()}\\{STORAGE_PATH}\\{filename}.json";
+
         public static async void SaveAsJson<T>(T obj, string filename)
         {
             string json = JsonSerializer.Serialize(obj);
 
-            using (StreamWriter sw = new($"{Directory.GetCurrentDirectory()}\\{STORAGE_PATH}\\{filename}.json"))
+            using (StreamWriter sw = new(GetFilePath(filename)))
             {
                 await sw.WriteAsync(json);
             }
@@ -19,7 +22,7 @@ namespace Ping.Models
 
         public static async Task<T?> ReadFromJson<T>(string filename)
         {
-            using (StreamReader sr = new($"{Directory.GetCurrentDirectory()}\\{STORAGE_PATH}\\{filename}.json"))
+            using (StreamReader sr = new(GetFilePath(filename)))
             {
                 string json = await sr.ReadToEndAsync();
                 T? obj = JsonSerializer.Deserialize<T>(json);
@@ -36,6 +39,12 @@ namespace Ping.Models
                 list.Add(await ReadFromJson<T>(filename));
 
             return list;
+        }
+
+        public static void Delete(string filename)
+        {
+            if (File.Exists(GetFilePath(filename)))
+                File.Delete(GetFilePath(filename));
         }
     }
 }
