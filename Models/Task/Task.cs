@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Text.Json.Serialization;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Ping.Models.Task
 {
@@ -16,6 +17,9 @@ namespace Ping.Models.Task
         [ObservableProperty]
         private bool _isCompleted = false;
 
+        [JsonConstructor]
+        public Task() { }
+
         public Task(string name, DateTime deadline)
         {
             Id = Guid.NewGuid();
@@ -30,9 +34,9 @@ namespace Ping.Models.Task
         }
 
         public void Save() =>
-            StorageManager.SaveAsJson(this, Id.ToString());
+            StorageManager.SaveAsJson(this, StorageManager.TASKS_FOLDER, Id.ToString());
 
         public void Delete() =>
-            StorageManager.Delete(Id.ToString());
+            StorageManager.Delete(StorageManager.TASKS_FOLDER, Id.ToString());
     }
 }

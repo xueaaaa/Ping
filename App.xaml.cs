@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.IO;
 using System.Windows;
 using Ping.Models;
 using Ping.Properties;
@@ -9,6 +10,8 @@ namespace Ping
     {
         public App()
         {
+            StorageManager.EnsureCreated();
+
             LocalizationManager.AddLang(CultureInfo.GetCultureInfo("ru"));
             LocalizationManager.AddLang(CultureInfo.GetCultureInfo("en"));
 
