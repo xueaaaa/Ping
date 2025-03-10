@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ping"
         xmlns:vm="clr-namespace:Ping.ViewModels"
+        xmlns:controls="clr-namespace:Ping.Views.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Style="{DynamicResource PingWindow}"
         mc:Ignorable="d"
@@ -12,6 +13,7 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    
     <Grid>
         <StackPanel Margin="100 0">
             <Button Style="{DynamicResource PingButton}"
@@ -19,8 +21,29 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Content="{DynamicResource CreateTaskButton}"/>
+            
             <Separator/>
-            <ListView ItemsSource="{Binding Tasks}"/>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Auto"
+                          Background="{DynamicResource AccentColor}"
+                          MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Window}}">
+                <ItemsControl ItemsSource="{Binding Tasks}"
+                              Margin="0 20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:TaskCard Margin="0 7"
+                                               Task="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Window>

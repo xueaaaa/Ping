@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Ping.Views.Controls.TaskCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ping.Views"
+             xmlns:t="clr-namespace:Ping.Models.Task"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:Ping.Converters"
+             mc:Ignorable="d"
+             MaxWidth="450"
+             Name="TCard">
+    <UserControl.Resources>
+        <converters:PriorityToIndexConverter x:Key="PriorityToIndexConverter"/>
+    </UserControl.Resources>
+    
+    <Border CornerRadius="17"
+                DataContext="{Binding ElementName=TCard, Path=Task}"
+                Background="{DynamicResource ContainerBackgroundColor}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}"
+                           TextTrimming="WordEllipsis"
+                           VerticalAlignment="Center"
+                           Margin="0 0 7 0"
+                           MaxWidth="400"
+                           Text="{Binding Name}"
+                           materialdesign:HintAssist.Hint="{Binding Name}"
+                           d:Text="Header"/>
+                <ListBox Style="{DynamicResource MaterialDesignChoiceChipOutlineListBox}"
+                         SelectedIndex="{Binding Priority, Mode=OneWay, Converter={StaticResource PriorityToIndexConverter}}"
+                         IsEnabled="False">
+                    <ListBoxItem Content="{DynamicResource HighPriorityRadioButton}"/>
+                    <ListBoxItem Content="{DynamicResource MediumPriorityRadioButton}"/>
+                    <ListBoxItem Content="{DynamicResource LowPriorityRadioButton}"/>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 0 0 5">
+                    <materialdesign:PackIcon Kind="ClockOutline"
+                                             Foreground="{DynamicResource HintColor}"
+                                             Margin="0 0 5 0"/>
+                    <TextBlock Text="{Binding Deadline, StringFormat=dd.MM.yyyy HH:mm}"
+                               VerticalAlignment="Bottom"
+                               Foreground="{DynamicResource HintColor}"/>
+                </StackPanel>
+
+                <TextBlock Text="{Binding Description}"
+                           Margin="0 5 0 0"
+                           Style="{DynamicResource MaterialDesignBody2TextBlock}"
+                           MaxWidth="500"
+                           TextWrapping="Wrap"
+                           TextAlignment="Justify"
+                           TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Style="{DynamicResource MaterialDesignCheckBox}"
+                          IsChecked="{Binding IsCompleted}"
+                          d:IsChecked="True"
+                          Content="{DynamicResource IsCompletedCheckBox}"
+                          Foreground="{DynamicResource HintColor}"
+                          Background="{DynamicResource AccentColor}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
