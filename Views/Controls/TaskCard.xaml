@@ -62,18 +62,38 @@
                            TextTrimming="CharacterEllipsis"/>
             </StackPanel>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2"
+                  Margin="0 5 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Style="{DynamicResource MaterialDesignCheckBox}"
+                <CheckBox Style="{DynamicResource MaterialDesignFlatToggleButton}"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          Width="32" Height="32"
                           IsChecked="{Binding IsCompleted}"
                           d:IsChecked="True"
-                          Content="{DynamicResource IsCompletedCheckBox}"
-                          Foreground="{DynamicResource HintColor}"
+                          Content="{materialdesign:PackIcon Kind=Check}"
                           Background="{DynamicResource AccentColor}"/>
+
+                <StackPanel Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                            Background="{DynamicResource AccentColor}"
+                            Content="{materialdesign:PackIcon Kind=Edit}"
+                            Width="32"
+                            Height="32"/>
+
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                            Background="{DynamicResource AccentColor}"
+                            Margin="7 0 0 0"
+                            Content="{materialdesign:PackIcon Kind=DeleteAlertOutline}"
+                            Width="32"
+                            Height="32"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>
